@@ -1,0 +1,13 @@
+# This file is used to define the schema tables/views for the clean layer in dbt/snowflake.
+# It includes the sources from which the data is derived, along with their descriptions.
+
+version: 2
+
+sources:
+  - name: clean_layer_realized_savings_clean_not_ignored
+    description: "source database for getting realized savings data"
+    database: clean_layer
+    schema: public
+    tables:
+      - name: realized_savings_report_clean_not_ignored
+        description: "View containing realized savings data with employee information"

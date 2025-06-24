@@ -1,0 +1,2 @@
+# This module folder is for any .sql file that relates to routine tasks on data within transformed layer database to get it ready for reporting
+# (e.x.: moving data between staging to transformed layer or modifying existing data in transformed layer)

@@ -1,0 +1,2 @@
+# This module folder is for any .sql file that relates to routine tasks on data within staging layer database to get it to ready state before using it in Analtics schemas (transformed layer)
+# (e.x.: moving data between clean_layer to staging_layer or modifying existing data in staging layer)
