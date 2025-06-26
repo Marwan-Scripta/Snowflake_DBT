@@ -1,2 +1,0 @@
-# This module folder is for any .sql file that relates to routine tasks on data within clean layer database to get it to a better readable state
-# (e.x.: moving data between raw_layer to clean layer or modifying existing data in clean layer)

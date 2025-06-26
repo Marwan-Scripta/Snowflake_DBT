@@ -1,2 +1,0 @@
-# This module folder is for any .sql file that relates to routine tasks on data within raw layer database to extract and collect from various data sources - no filtering
-# (e.x.: extracting data from RDS, S3, etc.)
