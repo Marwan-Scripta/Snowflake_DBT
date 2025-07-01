@@ -6,35 +6,35 @@ version: 2
 sources:
   - name: raw_layer_saverx_employee
     description: "source database for getting employee data"
-    database: raw_layer
+    database: "{{ 'raw_layer' + var('db_suffix', '') if target.name == 'test' else 'raw_layer' }}"
     schema: public
     tables:
       - name: saverx_employee
         description: "View containing employee data"
   - name: raw_layer_patient_condition
     description: "source database for getting patient condition data"
-    database: raw_layer
+    database: "{{ 'raw_layer' + var('db_suffix', '') if target.name == 'test' else 'raw_layer' }}"
     schema: master
     tables:
       - name: master_patientmedicalcondition
         description: "View containing patient condition data"
   - name: raw_layer_saverx_plan
     description: "source database for getting SaverX plan data"
-    database: raw_layer
+    database: "{{ 'raw_layer' + var('db_suffix', '') if target.name == 'test' else 'raw_layer' }}"
     schema: public
     tables:
       - name: saverx_plan
         description: "View containing SaverX plan data"
   - name: raw_layer_client_childcompany
     description: "source database for getting client child company data"
-    database: raw_layer
+    database: "{{ 'raw_layer' + var('db_suffix', '') if target.name == 'test' else 'raw_layer' }}"
     schema: public
     tables:
       - name: client_childcompany
         description: "View containing client child company data"
   - name: raw_layer_saverx_pbmhistory
     description: "source database for getting SaverX PBM history data"
-    database: raw_layer
+    database: "{{ 'raw_layer' + var('db_suffix', '') if target.name == 'test' else 'raw_layer' }}"
     schema: public
     tables:
       - name: saverx_pbmhistory

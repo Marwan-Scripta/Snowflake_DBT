@@ -6,8 +6,9 @@ version: 2
 sources:
   - name: clean_layer_realized_savings_clean_not_ignored
     description: "source database for getting realized savings data"
-    database: clean_layer
+    database:  "{{ 'clean_layer' + var('db_suffix', '') if target.name == 'test' else 'clean_layer' }}"
     schema: public
     tables:
       - name: realized_savings_report_clean_not_ignored
         description: "View containing realized savings data with employee information"
+

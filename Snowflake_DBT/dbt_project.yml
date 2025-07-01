@@ -1,16 +1,17 @@
+# dbt_project.yml
 
-# Name your project! Project names should contain only lowercase characters
-# and underscores. A good package name should reflect your organization's
-# name or the intended use of these models
 name: 'snowflake_dbt'
 version: '1.0.0'
 
-# This setting configures which "profile" dbt uses for this project.
+# DBT profile used to connect to your data warehouse
 profile: 'snowflake_dbt'
 
-# These configurations specify where dbt should look for different types of files.
-# The `model-paths` config, for example, states that models in this project can be
-# found in the "models/" directory. You probably won't need to change these!
+# Define global variables for the project
+vars:
+  # Used in schema.yml for appending suffix to database in test environment
+  db_suffix: '_Test'
+
+# DBT project paths
 model-paths: ["models"]
 analysis-paths: ["analyses"]
 test-paths: ["tests"]
@@ -18,18 +19,13 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-clean-targets:         # directories to be removed by `dbt clean`
+# Clean these folders on `dbt clean`
+clean-targets:
   - "target"
   - "dbt_packages"
 
-
-# Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
-
-
-# directory as views. These settings can be overridden in the individual model
-# files using the `{{ config(...) }}` macro.
+# Model-level configurations
 models:
   snowflake_dbt:
-    # Config indicated by + and applies to all files under models/example/
+    # Apply config to all models in this project namespace
     +database: "{{ target.database }}"

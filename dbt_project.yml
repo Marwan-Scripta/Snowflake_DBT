@@ -8,6 +8,11 @@ version: '1.0.0'
 # This setting configures which "profile" dbt uses for this project.
 profile: 'snowflake_dbt'
 
+# Define global variables for the project
+vars:
+  # Used in schema.yml for appending suffix to database in test environment
+  db_suffix: '_Test'
+
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
@@ -21,6 +26,7 @@ snapshot-paths: ["snapshots"]
 clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
+
 
 
 # Configuring models

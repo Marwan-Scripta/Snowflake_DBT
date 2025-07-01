@@ -103,23 +103,23 @@ SELECT
     rs.realised, 
     rs.drug_a_claim_id, 
     claims.ndc
-FROM  {{my_dynamic_source('clean_layer_realized_savings_clean_not_ignored','realized_savings_report_clean_not_ignored')}} rs
+FROM  {{ref('realized_savings_report_clean_not_ignored')}} rs
 JOIN
-    {{my_dynamic_source('staging_layer_current_customers_without_demo_accounts','client_master_current_customers_without_demo_accounts')}} cm ON (rs.client_id = cm.id) --> replacig existing client master table with this new view to exclude any demo accounts in reports
+    {{ref('client_master_current_customers_without_demo_accounts')}} cm ON (rs.client_id = cm.id) --> replacig existing client master table with this new view to exclude any demo accounts in reports
 LEFT JOIN 
-    {{my_dynamic_source('raw_layer_saverx_employee','saverx_employee')}} emp ON (rs.member_id = emp.id AND rs.client_id = emp.client_id)
+    {{ref('saverx_employee')}} emp ON (rs.member_id = emp.id AND rs.client_id = emp.client_id)
 LEFT JOIN 
-    {{my_dynamic_source('staging_layer_master_drug','vw_master_drug')}} md_a ON (rs.drug_a_id = md_a.id)
+    {{ref('vw_master_drug')}} md_a ON (rs.drug_a_id = md_a.id)
 LEFT JOIN 
-    {{my_dynamic_source('staging_layer_master_drug','vw_master_drug')}} md_b ON (rs.drug_b_id = md_b.id)
+    {{ref('vw_master_drug')}} md_b ON (rs.drug_b_id = md_b.id)
 LEFT JOIN 
-    {{my_dynamic_source('raw_layer_patient_condition','master_patientmedicalcondition')}} pmc ON (md_a.patient_medical_condition_id = pmc.id)
+    {{ref('master_patientmedicalcondition')}} pmc ON (md_a.patient_medical_condition_id = pmc.id)
 LEFT JOIN 
-    {{my_dynamic_source('raw_layer_saverx_plan','saverx_plan')}} plan ON (emp.health_plan_id = plan.id AND emp.client_id = plan.client_id)
+    {{ref('saverx_plan')}} plan ON (emp.health_plan_id = plan.id AND emp.client_id = plan.client_id)
 LEFT JOIN 
-    {{my_dynamic_source('raw_layer_client_childcompany','client_childcompany')}} cc ON (plan.child_company_id = cc.id AND plan.client_id = cc.client_id)
+    {{ref('client_childcompany')}} cc ON (plan.child_company_id = cc.id AND plan.client_id = cc.client_id)
 left join 
-    {{my_dynamic_source('raw_layer_saverx_pbmhistory','saverx_pbmhistory')}}  claims on (rs.client_id = claims.client_id and rs.drug_a_claim_id = claims.id)
+    {{ref('saverx_pbmhistory')}}  claims on (rs.client_id = claims.client_id and rs.drug_a_claim_id = claims.id)
 ),
 
 final_realized_savings_with_employee_data as (

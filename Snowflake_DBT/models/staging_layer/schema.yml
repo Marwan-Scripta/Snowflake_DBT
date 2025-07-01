@@ -6,14 +6,14 @@ version: 2
 sources:
   - name: staging_layer_current_customers_without_demo_accounts
     description: "source database for getting customer data without demo accounts"
-    database: staging_layer
+    database: "{{ 'staging_layer' + var('db_suffix', '') if target.name == 'test' else 'staging_layer' }}"
     schema: mastermgmt
     tables:
       - name: client_master_current_customers_without_demo_accounts
         description: "View containing customer data without demo accounts"
   - name: staging_layer_master_drug
     description: "source database for getting master drug data"
-    database: staging_layer
+    database:  "{{ 'staging_layer' + var('db_suffix', '') if target.name == 'test' else 'staging_layer' }}"
     schema: master
     tables:
       - name: vw_master_drug
